@@ -5,7 +5,7 @@
   tags: drush
 
 - name: install kraftwagen
-  git: repo=git://github.com/kraftwagen/kraftwagen.git dest=~/.drush
+  git: repo=https://github.com/kraftwagen/kraftwagen.git dest=~/.drush
   tags: drush
 
 - name: install drush registry rebuild
