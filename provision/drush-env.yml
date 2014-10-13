@@ -8,7 +8,7 @@
   git: repo=git://github.com/kraftwagen/kraftwagen.git dest=~/.drush
   tags: drush
 
-- nmae: install drush registry rebuild
+- name: install drush registry rebuild
   shell: drush dl registry_rebuild
   tags: drush
 
