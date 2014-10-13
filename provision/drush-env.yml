@@ -1,0 +1,17 @@
+---
+
+- name: install drush
+  apt: pkg=drush
+  tags: drush
+
+- name: install kraftwagen
+  git: repo=git://github.com/kraftwagen/kraftwagen.git dest=~/.drush
+  tags: drush
+
+- nmae: install drush registry rebuild
+  shell: drush dl registry_rebuild
+  tags: drush
+
+- name: clearing drush cache
+  shell: drush cc drush
+  tags: drush

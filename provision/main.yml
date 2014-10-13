@@ -1,0 +1,26 @@
+---
+- hosts: all
+  sudo: yes
+
+  tasks:
+  - name: apt update
+    apt: update_cache=yes
+#  - name: upgrade all packages
+#    apt: upgrade=dist
+  - name: install basic package
+    apt: pkg={{item}}
+    with_items:
+      - wget
+      - postfix
+      - mailutils
+      - git
+      - unzip
+      - pwgen
+
+  - include: apache.yml
+
+  - include: drush-env.yml
+
+  handlers:
+  - name: restart apache
+    service: name=apache2 state=restarted

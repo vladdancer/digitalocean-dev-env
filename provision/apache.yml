@@ -1,0 +1,22 @@
+---
+- name: install required package
+  apt: pkg={{item}}
+  with_items:
+    - php-apc
+    - cron
+    - php5-xdebug
+  tags: package
+
+- name: set apc enabled
+  lineinfile: dest=/etc/php5/mods-available/apcu.ini insertbefore=BOF line="apc.rfc1867 = 1"
+  tags: php
+  # apache related functions
+- name: enable mod_rewrite
+  shell: a2enmod rewrite
+  tags: apache
+- name: disable default site setting
+  shell: a2dissite 000-default
+  tags: apache
+- name: enable apache2
+  service: name=apache2 state=restarted enabled=yes
+  tags: apache
