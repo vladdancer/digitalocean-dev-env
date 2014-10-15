@@ -12,6 +12,10 @@
   shell: drush dl registry_rebuild
   tags: drush
 
+- name: copy digitalocean drush integration
+  shell: cp -rf ./drush_addons/digitalocean ~/.drush
+  tags: drush
+
 - name: clearing drush cache
   shell: drush cc drush
   tags: drush
