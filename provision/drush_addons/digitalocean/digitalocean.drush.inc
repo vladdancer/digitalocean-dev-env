@@ -131,10 +131,6 @@ function _digitalocean_params($required) {
     $ret['fail'] = true;
     drush_log("  '--domain' must be at least 3 characters long.", 'error');
   }
-  if (strpos($options['domain'], '.')===false) {
-    $ret['fail'] = true;
-    drush_log("  '--domain' must include a . for drupal installer to work.", 'error');
-  }
 
   // defaults
   $defaults['domain_'] = $domain_ = str_replace('.','_',$options['domain']);
