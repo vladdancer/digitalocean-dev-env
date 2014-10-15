@@ -86,7 +86,7 @@ define('APACHE_TEMPLATE', "
 
 /**
  * Configure apache virtualhost file using the template.
- * Files put in /etc/apache2/sites-available/$domain, then a2ensite'd
+ * Files put in /etc/apache2/sites-available/$domain.conf, then a2ensite'd
  * Runs: apache2 restart
  *
  * @param <type> $domain
@@ -105,11 +105,11 @@ function digitalocean_create_apache($domain, $params) {
   $str_config = str_replace("#DOMAIN#", $domain, $str_config);
   $str_config = str_replace("#CODEPATH#", $codepath, $str_config);
 
-  $config_handle = fopen("/etc/apache2/sites-available/$domain", "w+");
+  $config_handle = fopen("/etc/apache2/sites-available/$domain.conf", "w+");
   fwrite($config_handle, $str_config);
 
   // enable using script
-  digitalocean_shell_exec("sudo a2ensite $domain");
+  digitalocean_shell_exec("sudo a2ensite $domain.conf");
 
   // restart apache
   // use sysvinit scripts instead of upstart for more compatibility(debian, etc)
@@ -124,8 +124,8 @@ function digitalocean_create_apache($domain, $params) {
  * @param <type> $params
  */
 function digitalocean_destroy_apache($domain, $params) {
-  digitalocean_shell_exec("sudo a2dissite $domain", false);
-  $filename = "/etc/apache2/sites-available/$domain";
+  digitalocean_shell_exec("sudo a2dissite $domain.conf", false);
+  $filename = "/etc/apache2/sites-available/$domain.conf";
   if (file_exists($filename)) unlink($filename);  // unlink = delete file
   // use sysvinit scripts instead of upstart for more compatibility(debian, etc)
   digitalocean_shell_exec("sudo /etc/init.d/apache2 restart");

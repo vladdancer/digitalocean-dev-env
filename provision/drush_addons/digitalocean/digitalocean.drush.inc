@@ -196,7 +196,7 @@ function drush_digitalocean_create() {
       drush_log('                                                ... done.', 'ok');
     }
     if (array_search("apache", $params)) {  // apache after code to handle mkdir
-      drush_log("Creating apache config (/etc/apache2/sites-enabled/$domain)", 'ok');
+      drush_log("Creating apache config (/etc/apache2/sites-enabled/$domain.conf)", 'ok');
       digitalocean_create_apache($domain, $params);
       drush_log('                                                ... done.', 'ok');
     }
@@ -239,7 +239,7 @@ function drush_digitalocean_destroy() {
       drush_log('                                        ... done.', 'ok');
     }
     if (array_search("apache", $params)) {
-      drush_log("Destroying apache config (/etc/apache2/sites-enabled/$domain) ...", 'ok');
+      drush_log("Destroying apache config (/etc/apache2/sites-enabled/$domain.conf) ...", 'ok');
       digitalocean_destroy_apache($domain, $params);
       drush_log('                                        ... done.', 'ok');
     }
