@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-echo ">>> Installing ansible";
 
-# Install software-properties-common
-sudo apt-get install -y software-properties-common
+# when this script runs first on the target host, update default package and install ansible to provision
+if [ ! -x /usr/bin/ansible ]; then
+  echo ">>> Installing ansible";
 
-# Add repository
-sudo apt-add-repository -y ppa:ansible/ansible
-sudo apt-get update
-
-# Intall ansible
-sudo apt-get install -y ansible
+  apt-get update
+  apt-get dist-upgrade
+  apt-get install ansible python-apt -y
+fi
