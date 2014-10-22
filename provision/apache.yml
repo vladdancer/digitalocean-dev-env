@@ -10,13 +10,17 @@
 - name: set apc enabled
   lineinfile: dest=/etc/php5/mods-available/apcu.ini insertbefore=BOF line="apc.rfc1867 = 1"
   tags: php
+
   # apache related functions
 - name: enable mod_rewrite
   shell: a2enmod rewrite
   tags: apache
+
 - name: disable default site setting
   shell: a2dissite 000-default
   tags: apache
-- name: enable apache2
-  service: name=apache2 state=restarted enabled=yes
+
+- name: copy apache2 setting
+  copy: src=files/etc/apache2/apache2.conf dest=/etc/apache2/apache2.conf mode=0644
   tags: apache
+  notify: restart apache
