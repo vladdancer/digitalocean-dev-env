@@ -60,26 +60,22 @@ function digitalocean_fixpath($pathin) {
  */
 define('APACHE_TEMPLATE', "
 <VirtualHost *:80>
-  ServerName #DOMAIN#
-  ServerAlias *.#DOMAIN#
-  DocumentRoot #CODEPATH#
+  Alias /#DOMAIN# #CODEPATH#
   <Directory #CODEPATH#>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Order allow,deny
-    allow from all
+    Allow from all
   </Directory>
 </VirtualHost>
 <IfModule mod_ssl.c>
   <VirtualHost *:443>
-    ServerName #DOMAIN#
-    ServerAlias *.#DOMAIN#
-    DocumentRoot #CODEPATH#
+    Alias /#DOMAIN# #CODEPATH#
     <Directory #CODEPATH#>
       Options Indexes FollowSymLinks MultiViews
       AllowOverride All
       Order allow,deny
-      allow from all
+      Allow from all
     </Directory>
   </VirtualHost>
 </IfModule>");
